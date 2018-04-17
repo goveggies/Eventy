@@ -1,0 +1,53 @@
+body {
+    font-family: 'Gugi', cursive;
+}
+
+#logo {
+    width: 150px;
+    margin: 0 auto;
+}
+
+#logo h3 {
+    display: inline-block;
+    margin-left: 20px;
+    font-size: 1.4em;
+}
+
+#logo_chicken {
+    height: 50px;
+    width: 50px;
+    vertical-align: middle;
+}
+
+
+#inscription {
+    padding: 5%;
+}
+#inscription form {
+    margin: 0 auto;
+     width: 190px;
+    
+    text-align: center;
+}
+#inscription form a {
+    text-align: left;
+    font-size: 0.7em;
+    color: #000;
+    text-decoration: none;
+}
+#inscription form input {
+   height: 30px;
+    width: 190px;
+    border-radius: 3px;
+    margin-top: 0.45em;
+    margin-bottom: 0.45em;
+}
+#inscription form input[type=submit]{
+    font-family: 'Gugi', cursive;
+    background-color: #FADC61;
+    border: none;
+    border-radius: 3;
+    font-size: 0.8em;
+    width: 60%;
+    margin-top: 10px;
+}
