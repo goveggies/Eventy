@@ -11,37 +11,58 @@
         <nav>
             <div id="logo">
                 <img src="chick.png" id="logo_chicken">
-                <h3> Eventy </h3>
+                <h3> Eventy  mcm0239a - 2pdcmpaa </h3>
             </div>
         </nav>
  
     
     <section>
-        <div id="inscription">
+        <div id="formulaire">
+           
+	    <h4 style="text-align:center; font-size: 2em;">Créer un évènement</h4>
             <form action="page.php" method="post">
-                <label for="nom">Nom</label>
-                <input type="text" name="nom"><br>
+               <table id="table">
+               <tr>
+                <td><label for="nom">Nom</label></td>
+                <td><input type="text" name="nom"></td>
+               </tr>
                 
-                <label for="prénom">Prenom</label>
-                <input type="text" name="prénom"><br>
+                <tr>
+                    <td><label for="prénom">Prenom</label></td>
+                    <td><input type="text" name="prénom"></td>
+                   </tr>
                 
-                <label for="civ">Civilite</label>
-                <input type="text" name="civ"><br>
+                <tr>
+                    <td><label for="civ">Civilite</label></td>
+                <td><select name="civ">
+                  <option value="Mdme">Madame</option>
+                  <option value="M">Monsieur</option>
+                  <option value="Autre">Autre</option>
+                    </select></td>
+                   </tr>
                 
-                <label for="nsoc">Nom de la societe</label>
-                <input type="text" name="nsoc"><br>
+                <tr>
+                    <td><label for="nsoc">Nom de la societe</label></td>
+                    <td><input type="text" name="nsoc"></td>
+                   </tr>
                 
-                <label for="ville">Ville</label>
-                <input type="text" name="ville"><br>
+                <tr>
+                    <td><label for="ville">Ville</label></td>
+                    <td><input type="text" name="ville"></td>
+                   </tr>
                 
-                <label for="adresse">Adresse</label>
-                <input type="text" name="adresse"><br>
+                <tr>
+                    <td><label for="adresse">Adresse</label></td>
+                    <td><input type="text" name="adresse"></td>
+                   </tr>
                 
-                <label for="cp">Code postale</label>
-                <input type="text" name="cp"><br>
-                
+                <tr>
+                    <td><label for="cp">Code postal</label></td>
+                    <td><input type="text" name="cp"></td>
+                   </tr>
+               </table>
                
-                <input type="submit" name="submit" value="Terminer">
+                <input id="terminer" type="submit" name="submit" value="Terminer">
 
             </form>
         </div>
