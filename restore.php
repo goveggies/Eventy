@@ -10,11 +10,19 @@ $etat = 'initial';
 
 if(isset($_GET['t'])) {
     // token est initialisé, on permet le changement de mpd
+    $token = $_GET['t'];
+    
+    // test si le token est disponible
+    require('connect.php');
+    
+    $reqTokenExist = $linkpdo->prepare("SELECT token FROM Comptes WHERE adressemail = :adressemail");	
+    $reqTokenExist->execute(array('adressemail'=>$destinataire ));
+	
+    $nbLignes = $reqSelectExist->rowCount();
+
+    if($nbLignes > 0) $etat = 'token';
 
 
-
-
-    $etat = 'token';
 } else {
     // token non initialité
     if(isset($_POST['submitmail'])) {
@@ -27,14 +35,27 @@ if(isset($_GET['t'])) {
             si il n'existe pas : on change l'état (mailexistepas), et on active l'erreur
             si il existe : on génère token on envoie mail
         */
-
-        $token = bin2hex(random_bytes($length));
+        
+       	$reqSelectExist = $linkpdo->prepare("SELECT nom FROM Comptes WHERE adressemail = :adressemail");	
+	$reqSelectExist->execute(array(	'adressemail'=>$destinataire ));
+	
+	$nbLignes = $reqSelectExist->rowCount();
+	if($nbLignes < 1){
+		// si il n'existe pas : on change l'état (mailexistepas) pour activer l'erreur 
+		$etat='mailexistepas';
+		
+	}else {
+		
+        $token = bin2hex(random_bytes(12));
 
         // rentrer le token dans la base de donnée
+	$reqInsertToken = $linkpdo->prepare("UPDATE Comptes SET token = :token WHERE adressemail = :adressemail");
+	$reqInsertToken->execute(array(	'token' = $token,
+					'adressemail'=>$destinataire ));
+	
 
-
-
-        // si il existe
+        // Envoi du mail
+        
         $expediteur = 'mot-de-passe-perdu@eventy.com';
         $headers  = 'MIME-Version: 1.0' . "\n"; // Version MIME
         $headers .= 'Content-type: text/html; charset=ISO-8859-1'."\n"; // l'en-tete Content-type pour le format HTML
