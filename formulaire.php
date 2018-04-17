@@ -12,7 +12,7 @@ if (isset($_POST['submit'])) {
 	
 	// insérer nouveau contact
 	
-	$reqInsert = $linkpdo->prepare("INSERT INTO Comptes(nom, prenom, civilite, nomsociete, adresse, ville, cp) VALUES(:nom, :prenom, :civilite, :societe, :adresse, :ville, :cp) WHERE adressemail = $adressemail ;");	
+	$reqInsert = $linkpdo->prepare("INSERT INTO Comptes(nom, prenom, civilite, nomsociete, adresse, ville, cp) VALUES(:nom, :prenom, :civilite, :societe, :adresse, :ville, :cp) WHERE id =". $_POST['id']." ;");	
 	$reqInsert->execute(array(
 		'nom'=>$_POST['nom'],
 		'prenom'=>$_POST['prenom'],
