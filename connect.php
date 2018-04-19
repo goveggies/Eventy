@@ -1,12 +1,11 @@
 <?php
 
 	try{
-		$linkpdo = new PDO("mysql:host=localhost;dbname=mcm0239a", "mcm0239a", "2pdcmpaa");
+		$GLOBALS['linkdpo'] = new PDO("mysql:host=localhost;dbname=mcm0239a", "root", "");
 		echo 'connexion OK';
 	}catch(Exception $e){
+		echo 'connexion pas OK';
 		die('Erreur: '.$e->getMessage());
 	}
-
-
-
+	
 ?>

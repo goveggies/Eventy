@@ -5,11 +5,10 @@ if(isset($_POST['adressemail']) && isset($_POST['motdepasse'])) {
 
 	require('connect.php');
 	
-	$reqSelectExist = $linkpdo->prepare("SELECT id,motdepasse FROM Comptes WHERE adressemail = :adressemail;");	
+	$reqSelectExist = $linkpdo->prepare("SELECT id,motdepasse FROM comptes WHERE adressemail = :adressemail;");	
 	$reqSelectExist->execute(array(
 		'adressemail'=> $adressemail
 		));
-	
 	$nbLignes = $reqSelectExist->rowCount();
 
 
