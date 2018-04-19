@@ -26,7 +26,7 @@
                 <label for="motdepasse">Mot de passe</label>
                 <input type="password" name="motdepasse" minlength="6" required><br>
                 <input type="submit" name="submit" value="Se connecter"><br>
-        	    <a href="index.html"> S'inscrire</a><br>
+        	    <a href="index.php"> S'inscrire</a><br>
                	<a href="restore.php">Mot de passe oublie</a><br>
                 <?php
                     if(isset($_GET['mdp']))

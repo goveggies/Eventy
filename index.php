@@ -23,7 +23,7 @@
                 <label for="motdepasse">Mot de passe</label>
                 <input type="password" name="motdepasse" minlength="6" required><br>
                	 <input type="submit" name="submit" value="S'inscrire">
-               	<a href="connexion.html">Connexion</a>       	
+               	<a href="connexion.php">Connexion</a>       	
                <?php
                     if(isset($_GET['email']))
                     {
