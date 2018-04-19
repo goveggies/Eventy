@@ -24,9 +24,8 @@ if (isset($_POST['submit'])) {
 	));
 
   } else {
-  
   	//header('Location: formulaire.html');
-  	printf('information manquante');
+  	printf('Information manquante');
   	sleep(3);
   	header('Location: formulaire.html');
   }
