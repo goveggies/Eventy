@@ -16,7 +16,8 @@ if(isset($_POST['submitpass'])) {
 		if ($_POST['mdp1'] == $_POST['mdp2']){
 		$token = $_POST['tokeninput'];
 		$mdp1 = $_POST['mdp1'];
-		
+
+			require('connect.php');		
 			$reqUpdate = $linkpdo->prepare(" UPDATE Comptes SET motdepasse = :mdp  WHERE token = :token ;");
 			$reqInsert->execute(array('mdp'=>$mdp1, 'token'=>$token));
 			$reqUpdate = $linkpdo->prepare(" UPDATE Comptes SET token = NULL  WHERE motdepasse = :mdp ;");
@@ -155,7 +156,6 @@ if(isset($_GET['t'])) {
           <p class="center">L'email s'est mal envoyé. Il y a eu une erreur, re-essayez.</p>
           <?php
         } else if ($etat == 'token') {
-
             ?>
 
              <h4 style="text-align:center; font-size: 2em;"> Parametrez un nouveau mot de passe </h4>
@@ -170,15 +170,7 @@ if(isset($_GET['t'])) {
 
             <?php
         }
-
-
         ?>
-
-
-
-
-
-
     </div>
 </body>
 </html>
