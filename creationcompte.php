@@ -5,12 +5,12 @@
 		$adressemail = $_POST['adressemail'];
 		$motdepasse = $_POST['motdepasse'];
 
-		$req = $_SESSION['linkdpo']->prepare("SELECT nom FROM comptes WHERE adressemail = :adressemail");
+		$req = $linkdpo->prepare("SELECT nom FROM comptes WHERE adressemail = :adressemail");
 		$req->execute(array('adressemail'=> $adressemail));
 		$nbLignes = $req->rowCount();
 		
 		if($nbLignes == 0){
-			$res = $_SESSION['linkdpo']->prepare("INSERT INTO comptes (adressemail, motdepasse)
+			$res = $linkdpo->prepare("INSERT INTO comptes (adressemail, motdepasse)
 								VALUES (:adressemail, :motdepasse)");
 			$res->execute(array(
 				'adressemail' => $adressemail, 

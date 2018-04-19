@@ -1,3 +1,6 @@
+<?php
+    require ('connexioncompte.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,8 +22,8 @@
  
     
     <section>
+     
         <div id="formulaire">
-            
 	    <h4 style="text-align:center; font-size: 2em;">Parlons de vous</h4>
 	    <h4 style="text-align:center; font-size: 1.5em;">Parlem de vos</h4>
 	    
@@ -40,9 +43,9 @@
                 <tr>
                     <td><label for="civ">Civilite</label></td>
                     <td><select name="civ">
-                  <option value="Mdme">Madame</option>
-                  <option value="M">Monsieur</option>
-                  <option value="Autre">Autre</option>
+                    <option value="Mdme">Madame</option>
+                    <option value="M">Monsieur</option>
+                    <option value="Autre">Autre</option>
                     </select></td>
                    </tr>
                 
@@ -66,7 +69,7 @@
                     <td><input type="text" name="cp"></td>
                    </tr>
                </table>
-                <input type = "hidden" name="id" value="<?php $_SESSION['id']?>">
+                <input type = "hidden" name="id" value="<?php echo $_SESSION['id']?>">
                 <input id="terminer" type="submit" name="submit" value="Terminer">
 
             </form>
