@@ -23,7 +23,8 @@ if(isset($_POST['submitpass'])) {
 			$reqInsert->execute(array('mdp'=>$mdp1);
 
 		}else{
-			echo 'Les mots de passe sont différents';
+			echo 'Les mots de passe sont différents<br>';
+			echo 'Deux fois le même mot de passe il te faut saisir ';
 		}
 
 	}else {
