@@ -21,8 +21,7 @@ if(isset($_POST['submitpass'])) {
 			$reqUpdate = $linkpdo->prepare(" UPDATE Comptes SET motdepasse = :mdp  WHERE token = :token ;");
 			$reqInsert->execute(array('mdp'=>$mdp1, 'token'=>$token));
 			$reqUpdate = $linkpdo->prepare(" UPDATE Comptes SET token = NULL  WHERE motdepasse = :mdp ;");
-			$reqInsert->execute(array('mdp'=>$mdp1);
-
+			$reqInsert->execute(array('mdp'=>$mdp1));
 		}else{
 			echo 'Les mots de passe sont différents<br>';
 			echo 'Deux fois le même mot de passe il te faut saisir ';
@@ -33,6 +32,7 @@ if(isset($_POST['submitpass'])) {
 	}
 	// mettre à jour le mdp et supprimer le token lié
 }
+
 if(isset($_GET['t'])) {
     // token est initialisé, on permet le changement de mpd
     $token = $_GET['t'];
@@ -65,44 +65,45 @@ if(isset($_GET['t'])) {
 	$reqSelectExist->execute(array(	'adressemail'=>$destinataire ));
 	
 	$nbLignes = $reqSelectExist->rowCount();
-	if($nbLignes < 1){
-		// si il n'existe pas : on change l'état (mailexistepas) pour activer l'erreur 
-		$etat='mailexistepas';
+		if($nbLignes < 1){
+			// si il n'existe pas : on change l'état (mailexistepas) pour activer l'erreur 
+			$etat='mailexistepas';
 		
-	}else {
+		}else {
 		
-        $token = bin2hex(random_bytes(12));
+        	$token = bin2hex(random_bytes(12));
 
-        // rentrer le token dans la base de donnée
-	$reqInsertToken = $linkpdo->prepare("UPDATE Comptes SET token = :token WHERE adressemail = :adressemail");
-	$reqInsertToken->execute(array(	'token' = $token,
-					'adressemail'=>$destinataire ));
+       		// rentrer le token dans la base de donnée
+		$reqInsertToken = $linkpdo->prepare("UPDATE Comptes SET token = :token WHERE adressemail = :adressemail");
+		$reqInsertToken->execute(array('token'=>$token, 'adressemail'=>$destinataire ));
 	
 
-        // Envoi du mail
+        	// Envoi du mail
         
-        $expediteur = 'mot-de-passe-perdu@eventy.com';
-        $headers  = 'MIME-Version: 1.0' . "\n"; // Version MIME
-        $headers .= 'Content-type: text/html; charset=ISO-8859-1'."\n"; // l'en-tete Content-type pour le format HTML
-        $headers .= 'Reply-To: '.$expediteur."\n"; // Mail de reponse
-        $headers .= 'From: "Nom_de_expediteur"<'.$expediteur.'>'."\n"; // Expediteur
-        $headers .= 'Delivered-to: '.$destinataire."\n"; // Destinataire
-        $headers .= 'Cc: '.$copie."\n"; // Copie Cc
-        $headers .= 'Bcc: '.$copie_cachee."\n\n"; // Copie cachée Bcc
+        	$expediteur = 'mot-de-passe-perdu@eventy.com';
+        	$headers  = 'MIME-Version: 1.0' . "\n"; // Version MIME
+       		$headers .= 'Content-type: text/html; charset=ISO-8859-1'."\n"; // l'en-tete Content-type pour le format HTML
+        	$headers .= 'Reply-To: '.$expediteur."\n"; // Mail de reponse
+        	$headers .= 'From: "Nom_de_expediteur"<'.$expediteur.'>'."\n"; // Expediteur
+        	$headers .= 'Delivered-to: '.$destinataire."\n"; // Destinataire
+        	$headers .= 'Cc: '.$copie."\n"; // Copie Cc
+        	$headers .= 'Bcc: '.$copie_cachee."\n\n"; // Copie cachée Bcc
+	
+        	$sujet = "Eventy - Restaurer son mot de passe. ";
+        	$message ="On change votre mail sur cette adresse: http://eventy.com/?t=" . $token;
 
-        $sujet = "Eventy - Restaurer son mot de passe. ";
-        $message ="On change votre mail sur cette adresse: http://eventy.com/?t=" . $token;
+	
 
-        if(mail($destinataire,$sujet,$message,$headers)) {
-          // mail bien envoyé
-        } else {
-          // mail mal envoyé
-          $etat = 'erreurMail';
-        }
-    } else {
-        // aucun mail submitté.
-        echo 'pas de mail submitté';
-    }
+        		if(mail($destinataire,$sujet,$message,$headers)) {
+        	  	// mail bien envoyé
+			echo' mail envoyé';
+        		} else {
+          		// mail mal envoyé
+          		$etat = 'erreurMail';
+        		}
+		}
+    	}
+
 }
 
 
