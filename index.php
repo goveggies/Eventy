@@ -9,25 +9,27 @@
 </head>
 <body>
         <nav>
-            <a href='index.html'>
-                <div id="logo">
-                    <img src="chick.png" id="logo_chicken">  
-                    <h3> Eventy </h3>
-                </div>
-            </a>
+            <div id="logo">
+                <img src="chick.png" id="logo_chicken">
+                <h3> Eventy </h3>
+            </div>
         </nav>
     <section>
         <div id="inscription">
-	    <h4 style="text-align:center; font-size: 2em;">Connexion à votre compte</h4>
-
-		     <form action="formulaire.php" method="post">
+	    <h4 style="text-align:center; font-size: 2em;">Inscription</h4>	
+            <form action="creationcompte.php" method="post">
                 <label for="adressemail">Adresse mail</label>
                 <input type="email" name="adressemail"><br>
                 <label for="motdepasse">Mot de passe</label>
                 <input type="password" name="motdepasse" minlength="6" required><br>
-                <input type="submit" name="submit" value="Se connecter"><br>
-        	    <a href="index.html"> S'inscrire</a><br>
-               	<a href="restore.php">Mot de passe oublie</a>
+               	 <input type="submit" name="submit" value="S'inscrire">
+               	<a href="connexion.html">Connexion</a>       	
+               <?php
+                    if(isset($_GET['email']))
+                    {
+                        echo "E-mail déjà utilisé";
+                    }
+                ?>
             </form>
         </div>
     </section>
@@ -37,3 +39,4 @@
     </footer>
 </body>
 </html>
+

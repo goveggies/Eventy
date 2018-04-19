@@ -15,7 +15,7 @@ if(isset($_POST['adressemail']) && isset($_POST['motdepasse'])) {
 
 	if($nbLignes == 0)
 	{
-		header('Location: index.html');	
+		header('Location: index.php');	
 	} else if($nbLignes == 1) {
 		$res = $reqSelectExist->fetchAll();
 		
@@ -23,9 +23,8 @@ if(isset($_POST['adressemail']) && isset($_POST['motdepasse'])) {
 		{
 			$_SESSION['id'] = $res[0]['id'];
 		} else {
-			echo "Mot de passe non valide";
 			$reqSelectExist -> closeCursor();
-			header('Location: index.html');	
+			header('Location: connexion.php?mdp=invalide');	
 		}
 
 	} else {
