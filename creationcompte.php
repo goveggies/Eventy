@@ -17,7 +17,7 @@
 				'motdepasse' => $motdepasse
 			));			
 			echo "Inscription réussie !";
-			header('Location: connexion.html');	
+			header('Location: connexion.php');	
 		} else {
 			echo 'Adresse mail déjà utilisée';
 			session_destroy();

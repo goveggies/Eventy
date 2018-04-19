@@ -9,7 +9,7 @@
 </head>
 <body>
         <nav>
-            <a href='index.html'>
+            <a href='index.php'>
                 <div id="logo">
                     <img src="chick.png" id="logo_chicken">  
                     <h3> Eventy </h3>

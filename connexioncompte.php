@@ -30,7 +30,7 @@ if(isset($_POST['adressemail']) && isset($_POST['motdepasse'])) {
 	} else {
 		echo "Erreur 666 - Explosion dans 3...2...1...";
 		$reqSelectExist -> closeCursor();
-		header('Location: index.html');		
+		header('Location: index.php');		
 	}
 
 	$reqSelectExist -> closeCursor();

@@ -18,9 +18,9 @@ if(isset($_POST['submitpass'])) {
 		$mdp1 = $_POST['mdp1'];
 
 			require('connect.php');		
-			$reqUpdate = $linkpdo->prepare(" UPDATE Comptes SET motdepasse = :mdp  WHERE token = :token ;");
+			$reqUpdate = $linkdpo->prepare(" UPDATE Comptes SET motdepasse = :mdp  WHERE token = :token ;");
 			$reqInsert->execute(array('mdp'=>$mdp1, 'token'=>$token));
-			$reqUpdate = $linkpdo->prepare(" UPDATE Comptes SET token = NULL  WHERE motdepasse = :mdp ;");
+			$reqUpdate = $linkdpo->prepare(" UPDATE Comptes SET token = NULL  WHERE motdepasse = :mdp ;");
 			$reqInsert->execute(array('mdp'=>$mdp1));
 		}else{
 			echo 'Les mots de passe sont différents<br>';
@@ -40,7 +40,7 @@ if(isset($_GET['t'])) {
     // test si le token est disponible
     require('connect.php');
     
-    $reqTokenExist = $linkpdo->prepare("SELECT token FROM Comptes WHERE adressemail = :adressemail");	
+    $reqTokenExist = $linkdpo->prepare("SELECT token FROM Comptes WHERE adressemail = :adressemail");	
     $reqTokenExist->execute(array('adressemail'=>$destinataire ));
 	
     $nbLignes = $reqSelectExist->rowCount();
@@ -61,7 +61,7 @@ if(isset($_GET['t'])) {
             si il existe : on génère token on envoie mail
         */
         
-       	$reqSelectExist = $linkpdo->prepare("SELECT nom FROM Comptes WHERE adressemail = :adressemail");	
+       	$reqSelectExist = $linkdpo->prepare("SELECT nom FROM Comptes WHERE adressemail = :adressemail");	
 	$reqSelectExist->execute(array(	'adressemail'=>$destinataire ));
 	
 	$nbLignes = $reqSelectExist->rowCount();
@@ -74,7 +74,7 @@ if(isset($_GET['t'])) {
         	$token = bin2hex(random_bytes(12));
 
        		// rentrer le token dans la base de donnée
-		$reqInsertToken = $linkpdo->prepare("UPDATE Comptes SET token = :token WHERE adressemail = :adressemail");
+		$reqInsertToken = $linkdpo->prepare("UPDATE Comptes SET token = :token WHERE adressemail = :adressemail");
 		$reqInsertToken->execute(array('token'=>$token, 'adressemail'=>$destinataire ));
 	
 
