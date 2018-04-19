@@ -9,10 +9,12 @@
 </head>
 <body>
         <nav>
-            <div id="logo">
-                <img src="chick.png" id="logo_chicken">
-                <h3> Eventy </h3>
-            </div>
+            <a href='index.html'>
+                <div id="logo">
+                    <img src="chick.png" id="logo_chicken">  
+                    <h3> Eventy </h3>
+                </div>
+            </a>
         </nav>
  
     
@@ -22,7 +24,7 @@
 	    <h4 style="text-align:center; font-size: 2em;">Parlons de vous</h4>
 	    <h4 style="text-align:center; font-size: 1.5em;">Parlem de vos</h4>
 	    
-            <form action="formulaire.php" method="post">
+            <form action="formulaireSQL.php" method="post">
             
                <table id="table">
                <tr>
@@ -37,7 +39,7 @@
                 
                 <tr>
                     <td><label for="civ">Civilite</label></td>
-                <td><select name="civ">
+                    <td><select name="civ">
                   <option value="Mdme">Madame</option>
                   <option value="M">Monsieur</option>
                   <option value="Autre">Autre</option>
@@ -64,7 +66,7 @@
                     <td><input type="text" name="cp"></td>
                    </tr>
                </table>
-                <input type = "hidden" name="id" value="<?php $_GET['id']?>">
+                <input type = "hidden" name="id" value="<?php $_SESSION['id']?>">
                 <input id="terminer" type="submit" name="submit" value="Terminer">
 
             </form>

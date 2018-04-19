@@ -1,39 +1,37 @@
 <?php
 	if(isset($_POST['adressemail']) && isset($_POST['motdepasse'])){
-		//require ('connect.php');
-		try
-		{
-			$bdd = new PDO('mysql:host=localhost;dbname=mcm0239a', 'root', '');
-		}
-		catch (Exception $e)
-		{
-			die('Erreur : ' . $e->getMessage());
-		}
+		require ('connect.php');
 		
-	//	print_r($bdd);
 		$adressemail = $_POST['adressemail'];
 		$motdepasse = $_POST['motdepasse'];
 
-		$req = $bdd -> prepare("SELECT nom FROM comptes WHERE adressemail = :adressemail");
+		$req = $_SESSION['linkdpo']->prepare("SELECT nom FROM comptes WHERE adressemail = :adressemail");
 		$req->execute(array('adressemail'=> $adressemail));
 		$nbLignes = $req->rowCount();
 		
 		if($nbLignes == 0){
-			$res = $bdd->prepare("INSERT INTO comptes (adressemail, motdepasse)
+			$res = $_SESSION['linkdpo']->prepare("INSERT INTO comptes (adressemail, motdepasse)
 								VALUES (:adressemail, :motdepasse)");
 			$res->execute(array(
 				'adressemail' => $adressemail, 
 				'motdepasse' => $motdepasse
 			));			
-			echo "Ajout effectué";
+			echo "Inscription réussie !";
+			sleep(1);
+			session_destroy();
+			header('Location: connexion.html');	
 		} else {
 			echo 'Adresse mail déjà utilisée';
+			sleep(1);
+			session_destroy();
+			header('Location: index.html');	
 		}
 	}
 	else
 	{
 		echo 'Erreur saisie';
+		session_destroy();
+		header('Location: index.html');	
 	}
-
 ?>
 

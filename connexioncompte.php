@@ -5,7 +5,7 @@ if(isset($_POST['adressemail']) && isset($_POST['motdepasse'])) {
 
 	require('connect.php');
 	
-	$reqSelectExist = $linkpdo->prepare("SELECT id,motdepasse FROM comptes WHERE adressemail = :adressemail;");	
+	$reqSelectExist = $_SESSION['linkdpo']->prepare("SELECT id,motdepasse FROM comptes WHERE adressemail = :adressemail;");	
 	$reqSelectExist->execute(array(
 		'adressemail'=> $adressemail
 		));
@@ -22,8 +22,8 @@ if(isset($_POST['adressemail']) && isset($_POST['motdepasse'])) {
 		if($motdepasse == $res[0]['motdepasse'])
 		{
 			echo "Mot de passe valide";
-			$id = $res[0]['id'];
-			header('Location: formulaire.html?id='.$id);	
+			$_SESSION['id'] = $res[0]['id'];
+			header('Location: formulaire.php');	
 		} else {
 			echo "Mot de passe non valide";
 			header('Location: index.html');	
