@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  localhost
--- Généré le :  Mar 17 Avril 2018 à 16:44
+-- Généré le :  Jeu 17 Mai 2018 à 10:16
 -- Version du serveur :  5.5.59-0+deb8u1
 -- Version de PHP :  5.6.33-0+deb8u1
 
@@ -38,25 +38,18 @@ CREATE TABLE IF NOT EXISTS `Comptes` (
   `ville` varchar(20) NOT NULL,
 `id` int(11) NOT NULL,
   `token` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1 COMMENT='allez';
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1 COMMENT='allez';
 
 --
 -- Contenu de la table `Comptes`
 --
 
 INSERT INTO `Comptes` (`adressemail`, `motdepasse`, `nom`, `prenom`, `adresse`, `civilite`, `nomsociete`, `cp`, `ville`, `id`, `token`) VALUES
-('michau.mathilde@gmail.com', 'mathilde', '', '', '', '', '', '', '', 4, NULL),
-('gjrfije@oedeoes.fr', 'doethriopp', '', '', '', '', '', '', '', 9, NULL),
-('123@456', '123456', '', '', '', '', '', '', '', 10, NULL),
-(NULL, NULL, '', '', '', 'M', '', '', '', 11, NULL),
-(NULL, NULL, 'Dupont', 'jhon', '27 chemin dels horts', 'Mdme', 'toutou', '32000', 'RENNES', 12, NULL),
-(NULL, NULL, 'Dupont', 'jhon', '27 chemin dels horts', 'Mdme', 'toutou', '32000', 'RENNES', 13, NULL),
-(NULL, NULL, 'Dupont', 'jhon', '27 chemin dels horts', 'Mdme', 'toutou', '32000', 'RENNES', 14, NULL),
-(NULL, NULL, 'Dupont', 'jhon', '27 chemin dels horts', 'Mdme', 'toutou', '32000', 'RENNES', 15, NULL),
-(NULL, NULL, 'Dupont', 'jhon', '27 chemin dels horts', 'Mdme', 'toutou', '32000', 'RENNES', 16, NULL),
-(NULL, NULL, 'Dupont', 'jhon', '27 chemin dels horts', 'Mdme', 'toutou', '32000', 'RENNES', 17, NULL),
-(NULL, NULL, 'Dupont', 'jhon', '27 chemin dels horts', 'Mdme', '', '32000', 'RENNES', 18, NULL),
-(NULL, NULL, 'Verdier', 'fernande', '27 chemin dels horts', 'Mdme', 'bonus', '32000', 'RENNES', 19, NULL);
+('guig@gmail.com', '123456789', '', '', '', '', '', '', '', 21, NULL),
+('cryptoto@gmail.com', 'paulalove', '', '', '', '', '', '', '', 23, NULL),
+('mathilde@math.com', 'mathilde', '', '', '', '', '', '', '', 24, NULL),
+('salut@la.fr', 'onpeutpasdire', '', '', '', '', '', '', '', 25, NULL),
+('ici@ici.fr', '0123456789', '', '', '', '', '', '', '', 26, NULL);
 
 --
 -- Index pour les tables exportées
@@ -76,7 +69,7 @@ ALTER TABLE `Comptes`
 -- AUTO_INCREMENT pour la table `Comptes`
 --
 ALTER TABLE `Comptes`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=20;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=27;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
