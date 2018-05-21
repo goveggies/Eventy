@@ -1,0 +1,64 @@
+#inscription form input[type=submit] {
+    font-family: 'Gugi', cursive;
+    background-color: #FADC61;
+    border: none;
+    border-radius: 3px;
+    font-size: 0.8em;
+    width: 60%;
+    margin-top: 10px;
+}
+
+#panel-container {
+    padding: 50px;
+}
+
+h4 {
+    font-size: 1.8em;
+    margin: 0px;
+}
+
+.details {
+    font-size: 1.25em;
+    margin-bottom: 50px;
+}
+
+.avancement-container {
+    height: 8px;
+    width: 100%;
+    border: 1px solid #ccc;
+}
+
+.avancement-bar {
+    height: 100%;
+    width: 85%;
+    background-color: red;
+}
+
+.pourcentage_avancement {
+    float: right;
+    font-size: 1.55em;
+}
+
+.pointage {
+    background-color: #FADC61;
+    border: none;
+    display: block;
+    border-radius: 3px;
+    padding: 10px;
+    font-size: 1.0em;
+    text-align: center;
+    margin-left: 45%;
+    margin-top: 50px;
+}
+
+.hidden {
+    display: none;
+}
+
+video {
+    margin: 0 auto;
+}
+
+#load_participants {
+    
+}

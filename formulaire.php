@@ -1,5 +1,5 @@
 <?php
-    require ('connexioncompte.php');
+    include('connexioncompte.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,6 +23,15 @@
     
     <section>
      
+        <?php
+            if($isAdmin) {
+                // c'est un admin, afficher le panel et pas le formulaire
+                echo 'c un admin';
+            } else {
+                // ce n'est pas un admin, afficher le formulaire
+        ?>
+
+
         <div id="formulaire">
 	    <h4 style="text-align:center; font-size: 2em;">Parlons de vous</h4>
 	    <h4 style="text-align:center; font-size: 1.5em;">Parlem de vos</h4>
@@ -74,6 +83,11 @@
 
             </form>
         </div>
+
+        <?php
+        }
+        ?>
+
     </section>
     
     
