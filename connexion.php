@@ -1,10 +1,11 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Eventy - lo vòstre eveniment grand encara</title>
     <link rel="stylesheet" href="style/screen.css">
-    <link rel="icon" type="image/png" href="chick.png" />
     <link href="https://fonts.googleapis.com/css?family=Gugi" rel="stylesheet">
 </head>
 <body>

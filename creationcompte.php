@@ -1,16 +1,18 @@
 <?php
+
+
 	if(isset($_POST['adressemail']) && isset($_POST['motdepasse'])){
 		require ('connect.php');
 		
 		$adressemail = $_POST['adressemail'];
 		$motdepasse = $_POST['motdepasse'];
 
-		$req = $linkdpo->prepare("SELECT nom FROM comptes WHERE adressemail = :adressemail");
+		$req = $linkdpo->prepare("SELECT nom FROM Comptes WHERE adressemail = :adressemail");
 		$req->execute(array('adressemail'=> $adressemail));
 		$nbLignes = $req->rowCount();
 		
 		if($nbLignes == 0){
-			$res = $linkdpo->prepare("INSERT INTO comptes (adressemail, motdepasse)
+			$res = $linkdpo->prepare("INSERT INTO Comptes (adressemail, motdepasse)
 								VALUES (:adressemail, :motdepasse)");
 			$res->execute(array(
 				'adressemail' => $adressemail, 

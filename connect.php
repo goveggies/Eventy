@@ -1,7 +1,7 @@
 <?php
 	try{
-		$linkdpo = new PDO("mysql:host=localhost;dbname=mcm0239a", "root", "");
+		$linkdpo = new PDO("mysql:host=...;dbname=...", "...", "...");
 	}catch(Exception $e){
 		die('Erreur: '.$e->getMessage());
-	}	
+	}
 ?>
