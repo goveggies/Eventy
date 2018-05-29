@@ -53,22 +53,22 @@
                 <tr>
                     <td><label for="nsoc">Nom de la societe</label></td>
                     <td><input type="text" name="nsoc" required="required"></td>
-                   </tr>
-                
+                 </tr>
                 <tr>
-                    <td><label for="ville">Ville</label></td>
-                    <td><input type="text" name="ville" required="required"></td>
-                   </tr>
                 
-                <tr>
                     <td><label for="adresse">Adresse</label></td>
                     <td><input type="text" name="adresse" required="required"></td>
-                   </tr>
+                </tr>
                 
                 <tr>
                     <td><label for="cp">Code postal</label></td>
                     <td><input type="text" name="cp" required="required"></td>
-                   </tr>
+                </tr>
+                <tr>
+                    <td><label for="ville">Ville</label></td>
+                    <td><input type="text" name="ville" required="required"></td>
+                </tr>
+                
                </table>
                 
                 <input id="terminer" type="submit" name="submit" value="Terminer">
