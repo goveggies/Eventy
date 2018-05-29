@@ -22,14 +22,6 @@
  
     
     <section>
-     
-        <?php
-            if($isAdmin) {
-                // c'est un admin, afficher le panel et pas le formulaire
-                echo 'c un admin';
-            } else {
-                // ce n'est pas un admin, afficher le formulaire
-        ?>
 
 
         <div id="formulaire">
@@ -40,13 +32,13 @@
             
                <table id="table">
                <tr>
-                <td><label for="nom">Nom</label></td>
+                <td><label for="nom" required="required">Nom</label></td>
                 <td><input type="text" name="nom"></td>
                </tr>
                 
                 <tr>
                     <td><label for="prenom">Prénom</label></td>
-                    <td><input type="text" name="prenom"></td>
+                    <td><input type="text" name="prenom"  required="required"></td>
                    </tr>
                 
                 <tr>
@@ -60,33 +52,31 @@
                 
                 <tr>
                     <td><label for="nsoc">Nom de la societe</label></td>
-                    <td><input type="text" name="nsoc"></td>
+                    <td><input type="text" name="nsoc" required="required"></td>
                    </tr>
                 
                 <tr>
                     <td><label for="ville">Ville</label></td>
-                    <td><input type="text" name="ville"></td>
+                    <td><input type="text" name="ville" required="required"></td>
                    </tr>
                 
                 <tr>
                     <td><label for="adresse">Adresse</label></td>
-                    <td><input type="text" name="adresse"></td>
+                    <td><input type="text" name="adresse" required="required"></td>
                    </tr>
                 
                 <tr>
                     <td><label for="cp">Code postal</label></td>
-                    <td><input type="text" name="cp"></td>
+                    <td><input type="text" name="cp" required="required"></td>
                    </tr>
                </table>
-                <input type = "hidden" name="id" value="<?php echo $_SESSION['id']?>">
+                
                 <input id="terminer" type="submit" name="submit" value="Terminer">
 
             </form>
         </div>
 
-        <?php
-        }
-        ?>
+      
 
     </section>
     
