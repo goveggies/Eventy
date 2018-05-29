@@ -31,6 +31,14 @@
             <form action="formulaireSQL.php" method="post">
             
                <table id="table">
+                <tr>
+                    <td><label for="civ">Civilite</label></td>
+                    <td><select name="civ">
+                    <option value="Mdme">Madame</option>
+                    <option value="M">Monsieur</option>
+                    <option value="Autre">Autre</option>
+                    </select></td>
+                </tr>
                <tr>
                 <td><label for="nom" required="required">Nom</label></td>
                 <td><input type="text" name="nom"></td>
@@ -41,14 +49,7 @@
                     <td><input type="text" name="prenom"  required="required"></td>
                    </tr>
                 
-                <tr>
-                    <td><label for="civ">Civilite</label></td>
-                    <td><select name="civ">
-                    <option value="Mdme">Madame</option>
-                    <option value="M">Monsieur</option>
-                    <option value="Autre">Autre</option>
-                    </select></td>
-                   </tr>
+                
                 
                 <tr>
                     <td><label for="nsoc">Nom de la societe</label></td>
