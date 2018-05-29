@@ -112,6 +112,17 @@ if(isset($_POST['adressemail']) && isset($_POST['motdepasse'])) {
                 
                 if($isAdmin) {
                     // si admin
+                    
+                    // requête pour l'évènement
+                    $reqEvent = $linkdpo->prepare('SELECT * FROM EV_Evenement');
+                    $reqEvent->execute();
+
+                    $data = $reqEvent->fetch();
+
+                    // requête pour l'utilisateur
+                    $date = new DateTime($data['heure']);
+
+                    
                 ?>    
                     
                     <div id="panel">

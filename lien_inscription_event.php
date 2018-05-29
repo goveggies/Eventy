@@ -1,6 +1,6 @@
 
 
-<div>
+<div id="lien_inscription">
 
 <table id="table">
     <form action="participation_mail.php" method="post">

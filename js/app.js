@@ -9,8 +9,25 @@ $( document ).ready(function() {
         let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
             scanner.addListener('scan', function (content) {
             console.log('correctly scanned');
-            $('#video').append("<p style='color:green'>" + content + "</p>");
             // FAIRE LAJAX POUR VERIFIER SI C LE MEM QR CODE
+                
+            $.ajax({
+            type: "POST",
+            url: "verifyqr.php",
+            data: {"qrcode":content},
+            success: function(response){
+
+                if(response == 1) {
+                    // c'est un bon code
+                    $('#video').append("<p style='color:green'> Ce code est correct ! Sa valeur : " + content + "</p>");
+                } else {
+                    $('#video').append("<p style='color:red'> Ce code est inconnu, sa valeur: " + content + " </p>");
+                }
+        
+            }
+        });
+                
+                
             $('#btn_exitVideo').click();
             //$('#video video').remove();
             scanner.stop();
