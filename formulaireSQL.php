@@ -22,7 +22,7 @@ if (isset($_POST['submit'])) {
 			'cp'=>$_POST['cp']
 		));
 		print_r($reqInsert);
-		header('Location: fin.html');
+		header('Location: lien_inscription_event.html');
   } else {
   	print_r('Information manquante');
   	sleep(1);
