@@ -4,6 +4,12 @@ A FAIRE :
     faire le formulaire contenant Participer et rajouter le champ en invisible de adresse mail contenant l'adresse mail de l'user
 */
 
+    echo "ici";
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+
 
 if(isset($_POST['adressemail'])) {
     // si on a l'adresse email de l'utilisateur, on peut aller lui envoyer un email et générer un message
@@ -30,6 +36,8 @@ if(isset($_POST['adressemail'])) {
 
     $MsgQRCODE = bin2hex(random_bytes(12));
     
+    $adressemail = $_POST['adressemail'];
+    $destinataire = $adressemail;
     $data = $MsgQRCODE;
     $errorCorrectionLevel = 'H';
     $matrixPointSize = 8;
@@ -52,15 +60,11 @@ if(isset($_POST['adressemail'])) {
     */
 
 
-    require('connect.php');
-
-       	// rentrer le msg du QR code en clair dans la base de données
-		$reqInsertToken = $linkdpo->prepare("UPDATE Comptes SET pasQR = :msgqrcode WHERE adressemail = :adressemail");
-		$reqInsertToken->execute(array('msgqrcode'=>$MsgQRCODE, 'adressemail'=>$adressemail ));
-	
+    require('connect.php');	
 
         	// Envoi du mail contenant le QR Code et qui confirme la participation
         
+
         	$expediteur = 'participation@eventy.com';
         	$headers  = 'MIME-Version: 1.0' . "\n"; // Version MIME
        		$headers .= 'Content-type: text/html; charset=ISO-8859-1'."\n"; // l'en-tete Content-type pour le format HTML
@@ -68,14 +72,18 @@ if(isset($_POST['adressemail'])) {
         	$headers .= 'From: "Eventy !"<'.$expediteur.'>'."\n"; // Expediteur
         	$headers .= 'Delivered-to: '.$destinataire."\n"; // Destinataire
 	
-        	$sujet = " Eventy - Vous venez de vous incrire pour participer à un évènement ";
-        	$message ="Vous venez de vous inscrire à un évènement sur Eventy, voici votre code de participation (à garder précisuement): " . '<img src="'.$PNG_WEB_DIR.basename($filename).'" /><hr/>';
+        	$sujet = " Eventy - Vous venez de vous inscrire pour participer à un évènement ";
+        	$message ="Vous venez de vous inscrire à un évènement sur Eventy, voici votre code de participation (à garder précieusement): " . '<img src="http://blaguesdegeek.fr/'.$PNG_WEB_DIR.basename($filename).'" /><hr/>';
     
     		if(mail($destinataire,$sujet,$message,$headers)) {
         	  	    // mail bien envoyé
-                    // on dit que l'user participant dans la base de données
+                    // on dit que l'user participE dans la base de données
                     	$reqInsertToken = $linkdpo->prepare("UPDATE Comptes SET participant = :participant WHERE adressemail = :adressemail");
 		                  $reqInsertToken->execute(array('participant'=>1,'adressemail'=>$adressemail ));
+
+                        $reqInsertQr = $linkdpo->prepare("UPDATE Comptes SET passQR = :passQR WHERE adressemail = :adressemail");
+                          $reqInsertQr->execute(array('passQR'=>$MsgQRCODE,'adressemail'=>$adressemail ));
+
         		} else {
           		    // mail mal envoyé
           		    echo "error de l'envoie du mail";
@@ -83,8 +91,7 @@ if(isset($_POST['adressemail'])) {
     
     
 		}
-    	
-}
+    
 ?>
 
 
