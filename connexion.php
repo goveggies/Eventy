@@ -139,7 +139,7 @@ if(isset($_POST['adressemail']) && isset($_POST['motdepasse'])) {
                         <div id="qrcode"></div>
                         <div id="video">
                         <button id="btn_video" class="pointage">Faire un pointage</button>
-                        <div></div>
+                        <div class="reponse"></div>
                         <button id="btn_exitVideo" class="hidden">Arreter le scanning</button>
                         </div>
 

@@ -19,9 +19,9 @@ $( document ).ready(function() {
 
                 if(response == 1) {
                     // c'est un bon code
-                    $('#video').append("<p style='color:green'> Ce code est correct ! Sa valeur : " + content + "</p>");
+                    $('.reponse').html("<p style='color:green'> Ce code est correct ! Sa valeur : " + content + "</p>");
                 } else {
-                    $('#video').append("<p style='color:red'> Ce code est inconnu, sa valeur: " + content + " </p>");
+                    $('.reponse').html("<p style='color:red'> Ce code est inconnu, sa valeur: " + content + " </p>");
                 }
         
             }
