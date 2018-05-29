@@ -10,7 +10,8 @@ $( document ).ready(function() {
             scanner.addListener('scan', function (content) {
             console.log('correctly scanned');
             $('#video').append("<p style='color:green'>" + content + "</p>");
-                $('#btn_exitVideo').click();
+            // FAIRE LAJAX POUR VERIFIER SI C LE MEM QR CODE
+            $('#btn_exitVideo').click();
             //$('#video video').remove();
             scanner.stop();
         });

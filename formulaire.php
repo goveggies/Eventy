@@ -1,24 +1,33 @@
 <?php
-    include('connexioncompte.php');
+if (isset($_POST['submitFormulaire'])) {
+
+  if (isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['nsoc']) && isset($_POST['ville']) && isset($_POST['adresse']) && isset($_POST['cp'])) 
+	{
+		$requete = "UPDATE Comptes SET nom=:nom, prenom=:prenom, civilite=:civilite, nomsociete=:societe, adresse=:adresse, ville=:ville, cp=:cp WHERE id =".$_POST['id']." ;";
+		
+		$reqInsert = $linkdpo->prepare($requete);	
+		$reqInsert->execute(array(
+			'nom'=>$_POST['nom'],
+			'prenom'=>$_POST['prenom'],
+			'civilite'=>$_POST['civ'],
+			'societe'=>$_POST['nsoc'],
+			'adresse'=>$_POST['adresse'],
+			'ville'=>$_POST['ville'],
+			'cp'=>$_POST['cp']
+		));
+		print_r($reqInsert);
+		header('Location: connexion.php');
+  } else {
+  	print_r('Information manquante');
+  	sleep(1);
+  	header('Location: connexion.php');
+  }
+} 
+
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Eventy - lo vòstre eveniment grand encara</title>
-    <link rel="stylesheet" href="style/screen.css">
-    <link rel="icon" type="image/png" href="chick.png" />
-    <link href="https://fonts.googleapis.com/css?family=Gugi" rel="stylesheet">
-</head>
-<body>
-        <nav>
-            <a href='index.php'>
-                <div id="logo">
-                    <img src="chick.png" id="logo_chicken">  
-                    <h3> Eventy </h3>
-                </div>
-            </a>
-        </nav>
+
+
+
  
     
     <section>
@@ -28,7 +37,7 @@
 	    <h4 style="text-align:center; font-size: 2em;">Parlons de vous</h4>
 	    <h4 style="text-align:center; font-size: 1.5em;">Parlem de vos</h4>
 	    
-            <form action="formulaireSQL.php" method="post">
+            <form action="connexion.php" method="post">
             
                <table id="table">
                 <tr>
@@ -72,7 +81,7 @@
                 
                </table>
                 
-                <input id="terminer" type="submit" name="submit" value="Terminer">
+                <input id="terminer" type="submit" name="submitFormulaire" value="Terminer">
 
             </form>
         </div>
@@ -81,9 +90,3 @@
 
     </section>
     
-    
-    <footer>
-        
-    </footer>
-</body>
-</html>

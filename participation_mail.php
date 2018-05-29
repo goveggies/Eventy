@@ -4,7 +4,6 @@ A FAIRE :
     faire le formulaire contenant Participer et rajouter le champ en invisible de adresse mail contenant l'adresse mail de l'user
 */
 
-    echo "ici";
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -83,10 +82,12 @@ if(isset($_POST['adressemail'])) {
 
                         $reqInsertQr = $linkdpo->prepare("UPDATE Comptes SET passQR = :passQR WHERE adressemail = :adressemail");
                           $reqInsertQr->execute(array('passQR'=>$MsgQRCODE,'adressemail'=>$adressemail ));
+                    $_SESSION['connected'] = true;
+                    header('Location: connexion.php');
 
         		} else {
           		    // mail mal envoyé
-          		    echo "error de l'envoie du mail";
+          		    echo "Error de l'envoie du mail. Contacter un admin.";
         		}
     
     

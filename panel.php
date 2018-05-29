@@ -1,7 +1,4 @@
 <?php
-
-require('connexion.php');
-
 // requête pour l'évènement
 $reqEvent = $linkdpo->prepare('SELECT * FROM EV_Evenement');
 $reqEvent->execute();
@@ -14,39 +11,15 @@ $date = new DateTime($data['date']);
 
 
 // requête pour vérifier si le QR code est le même que 
-
+$reqVerifyQR = $linkpdo->prepare('SELECT passQR FROM Comptes WHERE passQR = :passQR');
+$reqVerifyQR->execute(array(
+    'passQR':$passQR
+));
 
 
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <title>Document</title>
-
-    <link href="https://fonts.googleapis.com/css?family=Gugi" rel="stylesheet">
-    <link rel="stylesheet" href="style/screen.css">
-    <link rel="stylesheet" href="style/admin.css">
-    <script
-  src="https://code.jquery.com/jquery-3.3.1.min.js"
-  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-             crossorigin="anonymous"></script>
-    <script type="text/javascript" src="js/instascan.min.js">
-    </script>
-  <script src="js/app.js"></script>
-</head>
-
-<body>
-    <nav>
-        <a href='index.php'>
-            <div id="logo">
-                <img src="chick.png" id="logo_chicken">
-                <h3> Eventy </h3>
-            </div>
-        </a>
-    </nav>
     <section>
         <div id="panel">
             <h4 style="text-align:center; font-size: 2em;">Panel d'organisation</h4>
@@ -73,7 +46,3 @@ $date = new DateTime($data['date']);
                 
             </div>
         </div>
-    </section>
-</body>
-
-</html>
