@@ -21,8 +21,8 @@
 
         $reqSelectParticipation = $linkdpo->prepare("SELECT participant FROM Comptes WHERE adressemail = :adressemail");
         $reqSelectParticipation->execute(array('adressemail'=>$adressemail ));
-        $countMail = $reqSelectParticipation->rowCount();
-        if($countMail > 0) {
+        $dataParticipant = $reqSelectParticipation->fetch();
+        if($dataParticipant['participant'] == 1) {
             $elementValue = "Vous participez";
             $elementOther = "disabled";
         } else {

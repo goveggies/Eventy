@@ -63,25 +63,28 @@ if(isset($_POST['adressemail'])) {
         	// Envoi du mail contenant le QR Code et qui confirme la participation
         
 
-        	$expediteur = 'participation@eventy.com';
-        	$headers  = 'MIME-Version: 1.0' . '\n'; // Version MIME
-       		$headers .= 'Content-type: text/html; charset=ISO-8859-1'.'\n'; // l'en-tete Content-type pour le format HTML
-        	$headers .= 'Reply-To: '.$expediteur."\n"; // Mail de reponse
-        	$headers .= 'From: "Eventy !"<'.$expediteur.'>'.'\n'; // Expediteur
-        	$headers .= 'Delivered-to: '.$destinataire.'\n'; // Destinataire
-	
+            // Always set content-type when sending HTML email
+            $headers = "MIME-Version: 1.0" . "\r\n";
+            $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+
+            // More headers
+            $headers .= 'From: <participation@eventy.com>' . "\r\n";
+
         	$sujet = " Eventy - Vous venez de vous inscrire pour participer à un évènement ";
         	$message ="Vous venez de vous inscrire à un évènement sur Eventy, voici votre code de participation (à garder précieusement): " . '<img src="http://blaguesdegeek.fr/'.$PNG_WEB_DIR.basename($filename).'" /><hr/>';
-
 
     		if(mail($destinataire,$sujet,$message,$headers)) {
         	  	    // mail bien envoyé
                     // on dit que l'user participE dans la base de données
-                    	$reqInsertToken = $linkdpo->prepare("UPDATE Comptes SET participant = :participant WHERE adressemail = :adressemail");
-		                  $reqInsertToken->execute(array('participant'=>1,'adressemail'=>$adressemail ));
+                    $reqInsertToken = $linkdpo->prepare("UPDATE Comptes SET participant = :participant WHERE adressemail = :adressemail");
+		            $reqInsertToken->execute(array('participant'=>1,'adressemail'=>$adressemail ));
 
-                        $reqInsertQr = $linkdpo->prepare("UPDATE Comptes SET passQR = :passQR WHERE adressemail = :adressemail");
-                          $reqInsertQr->execute(array('passQR'=>$MsgQRCODE,'adressemail'=>$adressemail ));
+                    $reqInsertQr = $linkdpo->prepare("UPDATE Comptes SET passQR = :passQR WHERE adressemail = :adressemail");
+                    $reqInsertQr->execute(array('passQR'=>$MsgQRCODE,'adressemail'=>$adressemail ));
+
+                    $reqUpdateParticipant = $linkdpo->prepare('UPDATE nbInscrit SET nbInscrit = nbInscrit +1 FROM EV_Evenement WHERE id = (SELECT max(id) FROM EV_Evenement) ');
+                    $reqUpdateParticipant->execute();
+                
                     $_SESSION['connected'] = true;
                     header('Location: connexion.php');
 

@@ -2,7 +2,11 @@
 
 
 require('connect.php');
-//session_destroy();
+
+if(isset($_GET['disconnect']) && $_GET['disconnect'] == 1) {
+    session_destroy();
+    header('Location: connexion.php');
+}
 
 
 ini_set('display_errors', 1);
@@ -64,7 +68,6 @@ if(isset($_POST['adressemail']) && isset($_POST['motdepasse'])) {
 		if($motdepasse == $res['motdepasse'])
 		{
 			$_SESSION['id'] = $res['id'];
-            echo 'ici conecté ';
             $_SESSION['connected'] = true;
 		} else {
 			$reqSelectExist -> closeCursor();
@@ -111,6 +114,9 @@ if(isset($_POST['adressemail']) && isset($_POST['motdepasse'])) {
                     <h3> Eventy </h3>
                 </div>
             </a>
+            <?php if($logged) { ?>
+            <a href="connexion.php?disconnect=1" style="position: absolute; right: 9px; top: 9px; font-size: 0.7em;">Déconnexion</a>
+            <?php } ?>
         </nav>
     <section>
         <?php
@@ -128,6 +134,10 @@ if(isset($_POST['adressemail']) && isset($_POST['motdepasse'])) {
 
                     // requête pour l'utilisateur
                     $date = new DateTime($data['heure']);
+                    $nbParticipant = $data['nbparticipant'];
+                    $nbInscrit = $data['nbInscrit'];
+
+                    $tauxPresence = ($nbParticipant/$nbInscrit)*100;
 
                     
                 ?>    
@@ -136,12 +146,12 @@ if(isset($_POST['adressemail']) && isset($_POST['motdepasse'])) {
                         <h4 style="text-align:center; font-size: 2em;">Panel d'organisation</h4>
                         <div id="panel-container">
 
-                        <h4> <?php echo $data['nom']; ?> <span class="inscrit">(75 inscrits)</span></h4>
+                        <h4> <?php echo $data['nom']; ?> <span class="inscrit">(<?php echo $nbInscrit; ?> inscrits)</span></h4>
                         <div class="details">Le <span class="date"><?php echo $date->format('Y-m-d'); ?></span> à <span class="lieu"><?php echo $data['lieu']; ?></span></div>
                         <div class="avancement-container">
-                        <div class="avancement-bar"></div>
+                        <div class="avancement-bar" style="width:<?php echo round($tauxPresence, 1); ?>%"></div>
                         </div>
-                        <p class="pourcentage_avancement"> Presence: 85 %</p>
+                        <p class="pourcentage_avancement"> Presence: <?php echo round($tauxPresence, 1); ?> %</p>
 
                         <div id="qrcode"></div>
                         <div id="video">
@@ -152,9 +162,8 @@ if(isset($_POST['adressemail']) && isset($_POST['motdepasse'])) {
 
 
                         <h5 id="load_participants">
-                        Voir les participants >
+                        Les participants >
                         </h5>
-
                         </div>
                     </div>
                     

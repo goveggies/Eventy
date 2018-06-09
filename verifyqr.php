@@ -18,6 +18,16 @@ $reqVerifyQR->execute(array(
     $count = $reqVerifyQR->rowCount();
     if($count > 0) {
         echo true;
+
+
+          $reqUpdateParticipantEvenement = $linkdpo->prepare('UPDATE nbparticipant SET nbparticipant = nbparticipant +1 FROM EV_Evenement WHERE id = (SELECT max(id) FROM EV_Evenement) ');
+          $reqUpdateParticipantEvenement->execute();
+
+          $reqDelVerifiedQR = $linkdpo->prepare('UPDATE passQR SET passQR = 0 FROM Comptes WHERE passQR = :passQR');
+		  $reqDelVerifiedQR->execute(array(
+    		'passQR'=>$_POST['qrcode']
+		  ));
+
     }
     echo false;
     
