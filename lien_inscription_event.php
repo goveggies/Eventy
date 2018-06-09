@@ -5,25 +5,40 @@
 <table id="table">
     <form action="participation_mail.php" method="post">
     <?php
-        $reqMail = $linkdpo->prepare("SELECT adressemail FROM comptes WHERE id = :id;");  
+        $reqMail = $linkdpo->prepare("SELECT adressemail FROM Comptes WHERE id = :id;");  
          if (isset($_SESSION['id']))
             $reqMail->execute(array(
                 'id'=> $_SESSION['id']
                 ));
 
-        $res = $reqMail->fetchAll();
+        $res = $reqMail->fetch();
 
-        $adressemail =$res[0]['adressemail'];
+        $adressemail =$res['adressemail'];
+
+
+
+        $etat = false;
+
+        $reqSelectParticipation = $linkdpo->prepare("SELECT participant FROM Comptes WHERE adressemail = :adressemail");
+        $reqSelectParticipation->execute(array('adressemail'=>$adressemail ));
+        $countMail = $reqSelectParticipation->rowCount();
+        if($countMail > 0) {
+            $elementValue = "Vous participez";
+            $elementOther = "disabled";
+        } else {
+            $elementValue = "Participer";
+            $elementOther = "";
+        }
     ?>
     <tr>
     <td><span>Les chaussettes chauffantes REQUIEM en la mineur</span>  
         <br> <span id="heure"> Horaire: 20h - 23h </span>
         <br> <span id="lieu"> Lieu: Tripode C </span></td>
         
-    <td class="buttonsubmit"><input type="submit" name="submit" value="Participer" onclick="alert('Merci de confirmer votre inscription à cet évènement via l email qui vient de vous être envoyé');"/>
+    <td class="buttonsubmit"><input type="submit" name="submit" <?php echo 'value="'.$elementValue.'"'; echo ' '.$elementOther;?>/>
     </td>
     </tr>
-    <input type="hidden" name="adressemail" value="<?php echo $adressemail ?>">
+    <input type="hidden" name="adressemail" <?php echo 'value="'.$adressemail.'"'; ?>/>
     </form>
 </table>
 

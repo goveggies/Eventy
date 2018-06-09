@@ -58,22 +58,22 @@ if(isset($_POST['adressemail'])) {
     * FIN DE LA GENERATION DU QR CODE
     */
 
-
     require('connect.php');	
 
         	// Envoi du mail contenant le QR Code et qui confirme la participation
         
 
         	$expediteur = 'participation@eventy.com';
-        	$headers  = 'MIME-Version: 1.0' . "\n"; // Version MIME
-       		$headers .= 'Content-type: text/html; charset=ISO-8859-1'."\n"; // l'en-tete Content-type pour le format HTML
+        	$headers  = 'MIME-Version: 1.0' . '\n'; // Version MIME
+       		$headers .= 'Content-type: text/html; charset=ISO-8859-1'.'\n'; // l'en-tete Content-type pour le format HTML
         	$headers .= 'Reply-To: '.$expediteur."\n"; // Mail de reponse
-        	$headers .= 'From: "Eventy !"<'.$expediteur.'>'."\n"; // Expediteur
-        	$headers .= 'Delivered-to: '.$destinataire."\n"; // Destinataire
+        	$headers .= 'From: "Eventy !"<'.$expediteur.'>'.'\n'; // Expediteur
+        	$headers .= 'Delivered-to: '.$destinataire.'\n'; // Destinataire
 	
         	$sujet = " Eventy - Vous venez de vous inscrire pour participer à un évènement ";
         	$message ="Vous venez de vous inscrire à un évènement sur Eventy, voici votre code de participation (à garder précieusement): " . '<img src="http://blaguesdegeek.fr/'.$PNG_WEB_DIR.basename($filename).'" /><hr/>';
-    
+
+
     		if(mail($destinataire,$sujet,$message,$headers)) {
         	  	    // mail bien envoyé
                     // on dit que l'user participE dans la base de données

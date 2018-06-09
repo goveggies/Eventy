@@ -3,12 +3,21 @@
 
 require('connect.php');
 //session_destroy();
+
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 $logged = false;
+$formulaireCompleted = false;
 $isAdmin = false;
+
+if(isset($_POST['submitFormulaire'])) {
+    $formulaireCompleted = true;
+}
 
 if(isset($_SESSION['connected']) && $_SESSION['connected'] == true) {
     $logged = true;
-    	
     $adressemail = $_SESSION['adressemail'];
 	$reqSelectExist = $linkdpo->prepare("SELECT * FROM Comptes WHERE adressemail = :adressemail;");	
 	$reqSelectExist->execute(array(
@@ -16,13 +25,8 @@ if(isset($_SESSION['connected']) && $_SESSION['connected'] == true) {
 		));
         
     $res = $reqSelectExist->fetch();
-    
+    $_SESSION['id'] = $res['id'];
 }
-
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-//include('participation_mail.php');
 
 
 
@@ -32,6 +36,7 @@ if(isset($_POST['adressemail']) && isset($_POST['motdepasse'])) {
 	$motdepasse = $_POST['motdepasse'];
     $logged = true;
     $_SESSION['adressemail'] = $adressemail;
+
 	
 	$reqSelectExist = $linkdpo->prepare("SELECT * FROM Comptes WHERE adressemail = :adressemail;");	
 	$reqSelectExist->execute(array(
@@ -59,6 +64,8 @@ if(isset($_POST['adressemail']) && isset($_POST['motdepasse'])) {
 		if($motdepasse == $res['motdepasse'])
 		{
 			$_SESSION['id'] = $res['id'];
+            echo 'ici conecté ';
+            $_SESSION['connected'] = true;
 		} else {
 			$reqSelectExist -> closeCursor();
 			header('Location: connexion.php?mdp=invalide');	
@@ -155,13 +162,42 @@ if(isset($_POST['adressemail']) && isset($_POST['motdepasse'])) {
                 } else {
                     // non admin
                     // a rempli formulaire ou non formulaire
-                    if(empty($res['nom'])) {
-                        // afficher le formulaire car l'utilisateur ne l'a jamais rentré
-                        include('formulaire.php');
-                    } else {
+                    if (($formulaireCompleted == true) || !empty($res['nom'])){
                         // afficher la page pour s'inscrire
+                        if (isset($_POST['submitFormulaire'])) {
+
+                            if (isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['nsoc']) && isset($_POST['ville']) && isset($_POST['adresse']) && isset($_POST['cp'])) 
+                            {
+                                $requete = "UPDATE Comptes SET nom=:nom, prenom=:prenom, civilite=:civilite, nomsociete=:societe, adresse=:adresse, ville=:ville, cp=:cp WHERE id =".$_POST['id']." ;";
+
+                                $reqInsert = $linkdpo->prepare($requete);   
+                                $reqInsert->execute(array(
+                                    'nom'=>$_POST['nom'],
+                                    'prenom'=>$_POST['prenom'],
+                                    'civilite'=>$_POST['civ'],
+                                    'societe'=>$_POST['nsoc'],
+                                    'adresse'=>$_POST['adresse'],
+                                    'ville'=>$_POST['ville'],
+                                    'cp'=>$_POST['cp']
+                                ));
+                            } else {
+                                    $formulaireCompleted = false;
+                                    sleep(1);
+                                    header('Location: connexion.php');
+                            }
+                        } 
+
+
+
+
+
                         include('lien_inscription_event.php');
                     }
+                    else if(empty($res['nom']) && !$formulaireCompleted) {
+                        // afficher le formulaire car l'utilisateur ne l'a jamais rentré
+                        include('formulaire.php');
+                    } 
+                  
                     
                 }
                 
